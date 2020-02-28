@@ -1,0 +1,377 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Deep dive with Fiji</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background-color="black" data-background-image="media/title.png" data-background-size="contain">
+					<h1>Deep dive with Fiji</h1>
+					The story of CSBDeep
+					<div class="header"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div></div>
+					<div class="logos"></div>
+				</section>
+				<!-- <section>
+					<h2>Outline</h2>
+					<ol class="outline bigger">
+						<li>Context</li>
+						<li>Deep learning for microscopy at CSBD</li>
+						<li>Toolset for Deep Learning in Fiji</li>
+						<li>Future work</li>
+					</ol>
+					<div class="header header-left"></div>
+				</section> -->
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div></div>
+					<h2>Context</h2>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Context</div></div>
+					<h3>Who am I?</h3>
+					<ul>
+						<li>Trained Media Computer Scientist</li>
+						<li>♥ Open Source</li>
+						<li><b>Research Software Engineer</b></li>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Context</div></div>
+					<img class="plain" style="margin-bottom: 100px;" src="media/csbd-color.png"/>
+					<img class="plain" src="media/cbg.png"/>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Context › Center for Systems Biology Dresden</div></div>
+					<img class="plain" src="media/CSBD.png"/>
+					<div class="footer credits">Matthias Arzt, Tim-Oliver Buchholz, Anna Goncharova, Florian Jug, Alexander Krull, Manan Lalit, Tobias Pietzsch, Nuno Pimpao Martins, Mangal Prakash, Allyson Ryan, Deborah Schmidt, Gabriella Turek, Pavel Tomancak, Robert Haase, Uwe Schmidt, Martin Weigert, Ulrik Günther</div>
+				</section>
+				<!-- <section>
+					<div class="header header-left"><div>Context</div></div>
+					<h2>The Fiji / ImageJ community</h2>
+				</section> -->
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Context › The Fiji / ImageJ community</div></div>
+					<img class="plain" src="media/community.png"/>
+					<div class="footer credits">Laboratory for Optical and Computational Instrumentation (Madison, USA), KNIME (Konstanz),<br/>and many lovely individuals from all over the world</div>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div></div>
+					<h2>Deep learning for microscopy at CSBD</h2>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Deep learning for microscopy at CSBD</div></div>
+					<img class="plain"  src="media/care-training.png"/>
+					<div class="footer credits">Weigert, M., Schmidt, U., Boothe, T. et al. Content-aware image restoration: pushing the limits of fluorescence microscopy.<br/>Nature Methods 15, 1090–1097 (2018)</div>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div></div>
+					<h2>Deep Learning in Fiji?</h2>
+				</section>
+				<section data-background-color="black" data-background-image="media/fijideep.png" data-background-size="contain">
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Deep Learning in Fiji?</div></div>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div></div>
+					<h2>Toolset for<br/>Deep Learning in Fiji</h2>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Toolset for DL in Fiji</div></div>
+					<h2>imagej-tensorflow</h2>
+					<div class="tool">
+						<div><img src="media/qr-imagej-tensorflow.png"/></div>
+						<ul>
+							<li>Java library for dealing with TensorFlow in ImageJ</li>
+							<li><a>https://github.com/imagej/imagej-tensorflow</a></li>
+						</ul>
+					</div>
+					<div class="footer credits">Curtis Rueden, Deborah Schmidt, Benjamin Wilhelm</div>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Toolset for DL in Fiji › imagej-tensorflow</div></div>
+					<img class="plain" src="media/python-to-fiji.png" height="70%">
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Toolset for DL in Fiji › imagej-tensorflow</div></div>
+					<img class="plain" src="media/model-to-tf.png">
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Toolset for DL in Fiji › imagej-tensorflow</div></div>
+					<img class="plain" src="media/tensorflow-installer.png">
+					<div class="tool-details">
+						<div class="tool-plugins">Edit › Options › TensorFlow..</div>
+					</div>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Toolset for DL in Fiji</div></div>
+					<h2>CSBDeep for Fiji</h2>
+					<div class="tool">
+						<div><img src="media/qr-csbdeep.png"/></div>
+						<ul>
+							<li>Toolkit for running image to image prediction<br/>on pretrained networks</li>
+							<li><a>https://imagej.net/CSBDeep/</a></li>
+						</ul>
+					</div>
+					<div class="tool-site"><span>Update Site: </span><a>https://sites.imagej.net/CSBDeep/</a></div>
+					<div class="footer credits">Deborah Schmidt, Benjamin Wilhelm</div>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Toolset for DL in Fiji › CSBDeep for Fiji</div></div>
+					<img class="plain" src="media/input-prediction-output.png">
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Toolset for DL in Fiji › CSBDeep for Fiji</div></div>
+					<img class="plain" src="media/input-predictiondetail-output.png">
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Toolset for DL in Fiji › CSBDeep for Fiji</div></div>
+					<div class="tool-details">
+							<div class="tool-plugins">Plugins › CSBDeep › Run your network</div>
+					</div>
+					<img class="plain" src="media/fijiplugin.png">
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Toolset for DL in Fiji › CSBDeep for Fiji</div></div>
+					<h2>Integration</h2>
+					<ul>
+							<li>CSBDeep can be used as a library to run<br/>prediction from a script / plugin</li>
+							<li>e.g. StarDist, DeepImageJ are using CSBDeep</li>
+					</li>
+				</section>
+				<section data-background-color="black" data-background-image="media/csbdeep-demos.png" data-background-size="contain">
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div></div>
+					<div class="tool-details">
+							<div class="tool-plugins">Plugins › CSBDeep › Demo › ..</div>
+					</div>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Toolset for DL in Fiji</div></div>
+					<h2>CSBDeep (python)</h2>
+					<div class="footer credits">Uwe Schmidt, Martin Weigert</div>
+				</section>
+				<section data-background-color="white" data-background-image="media/csbdeep-notebook.png" data-background-size="contain">
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Toolset for DL in Fiji › CSBDeep (python)</div></div>
+				</section>
+				<section data-background-color="white" data-background-image="media/csbdeep-notebook-zoom.png" data-background-size="contain">
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div>Toolset for DL in Fiji › CSBDeep (python)</div>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Toolset for DL in Fiji › CSBDeep for Fiji</div></div>
+					<img class="plain" src="media/input-prediction-output.png">
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Toolset for DL in Fiji</div></div>
+					<h2>Training</h2>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Toolset for DL in Fiji › Training</div></div>
+					<h3>Unsupervised training with N2V</h3>
+					<img class="plain"  height="50%" src="media/noise2void.png"/>
+					<div class="footer credits">Krull, A. and Buchholz, T. and Jug, F. Noise2void-learning denoising from single noisy images.<br/>Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (2019)</div>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Toolset for DL in Fiji</div></div>
+					<h2>Training</h2>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Toolset for DL in Fiji</div></div>
+					<h1 style="font-size: 600%;">Training</h1>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Toolset for DL in Fiji › Training</div></div>
+					<h2>N2V for Fiji</h2>
+					<div class="tool">
+						<div><img src="media/qr-n2vfiji.png"/></div>
+						<ul>
+							<li>one-lick solution for content aware denoising</li>
+							<li><a>https://github.com/juglab/N2V_fiji/</a></li>
+						</ul>
+					</div>
+					<div class="tool-site"><span>Update Site: </span><a>https://sites.imagej.net/N2V/</a></div>
+					<div class="footer credits">Deborah Schmidt, Gabriella Turek</div>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div>Toolset for DL in Fiji › Training › N2V for Fiji</div>
+					<img class="plain" src="media/training-in-java1.png">
+					<div class="tool-details">
+						<ul>
+							<li>Build the graph in python ..</li>
+						</ul>
+					</div>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div>Toolset for DL in Fiji › Training › N2V for Fiji</div>
+					<img class="plain" src="media/training-in-java2.png">
+					<div class="tool-details">
+						<ul>
+							<li>.. train the model in Java</li>
+						</ul>
+					</div>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div>Toolset for DL in Fiji › Training › N2V for Fiji</div>
+					<img class="plain" src="media/training-in-java3.png">
+					<div class="tool-details">
+						<ul>
+							<li>.. run prediction in Java</li>
+						</ul>
+					</div>
+				</section>
+				<section data-background-video="media/n2v-screencast.mp4">
+					<div class="tool-details">
+							<div class="tool-plugins">Plugins › CSBDeep › N2V › train + predict</div>
+					</div>
+					<!-- <img class="plain" src="media/n2v-screenshot.png"> -->
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div></div>
+					<h2>Future work</h2>
+				</section>
+				<!-- <section>
+					<div class="header header-left"><div>Future work</div></div>
+					<ul>
+						<li>How do you know if a pretrained model fits your data?</li>
+						<li>How do you distribute trained models?</li>
+						<li>How do you maintain a distributed model?</li>
+						<li>How do you retrain a distributed model?</li>
+						<li>What about reproducibility?</li>
+					</ul>
+				</section> -->
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div><div>Future work</div></div>
+					<h2>BioImage Model Zoo</h2>
+					<div class="tool">
+						<div><img src="media/qr-bioimageio.png"/></div>
+						<ul>
+							<li><a>https://bioimage.io/</a></li>
+							<li><a>https://github.com/bioimage-io</a></li>
+						</ul>
+					</div>
+					<div class="footer credits">
+						<ul>
+							<li><b>ImJoy</b> (Emma Lundberg, Wei Ouyang et al.)</li>
+							<li><b>Ilastik</b> (Anna Kreshuk et al.)</li>
+							<li><b>CellProfiler</b> (Anne Carpenter et al.)</li>
+							<li><b>Fiji / ImageJ</b> (Florian Jug, Pavel Tomancak, Kevin Eliceiri et al.)</li>
+							<li><b>DeepImageJ</b> (Estibaliz Gómez de Mariscal, Arrate Muñoz Barrutia, Daniel Sage)</li>
+						</ul>
+					</div>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div>Future work › BioImage Model Zoo</div>
+					<h2>?</h2>
+					<img class="plain" src="media/modelzoo.png" height="70%">
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div>Future work › BioImage Model Zoo</div>
+					<img class="plain" src="media/modelzoo-concept.png">
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div>Future work › BioImage Model Zoo</div>
+					<div class="tool">
+						<div><img src="media/qr-yamlspec.png"/></div>
+						<ul>
+							<li>YAML Specification</li>
+							<li><a>https://github.com/bioimage-io/configuration_draft</a></li>
+						</ul>
+					</div>
+					<div class="tool">
+						<div><img src="media/qr-imagejmodelzoo.png"/></div>
+						<ul>
+							<li>ImageJ Model Zoo Consumer</li>
+							<li><a>https://github.com/imagej/imagej-modelzoo/</a></li>
+						</ul>
+					</div>
+				</section>
+				<section>
+					<div class="header header-left"><div class="id">Deborah Schmidt<br/>NEUBIAS 20/03/06<br/><a href="http://frauzufall.de">@frauzufall</a></div></div>
+					<b>Thank you for your attention!</b>
+					<div class="footer">Slides: <a>https://github.com/...</a></div>
+
+				</section>
+			</div>
+		</div>
+
+		<div id="hidden" style="display:none;">
+	</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script src="js/jquery-2.2.4.min.js"></script>
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				transition: 'none',
+				backgroundTransition: 'fade',
+				fragmentInURL: true,
+				history: true,
+				width: "100%",
+				height: "100%",
+				margin: 0,
+				controlsTutorial: false,
+				display: "flex",
+				progress: false,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/menu/menu.js' }
+				],
+				menu: {
+					side: 'right',
+					titleSelector: 'h1, h2, h3, h4, h5, h6',
+					useTextContentForMissingTitles: true,
+					markers: false,
+
+					// Adds a menu button to the slides to open the menu panel.
+					// Set to 'false' to hide the button.
+					openButton: true,
+
+					// If 'true' allows the slide number in the presentation to
+					// open the menu panel. The reveal.js slideNumber option must
+					// be displayed for this to take effect
+					openSlideNumber: false,
+
+					// If true allows the user to open and navigate the menu using
+					// the keyboard. Standard keyboard interaction with reveal
+					// will be disabled while the menu is open.
+					keyboard: true,
+					// By default the menu will load it's own font-awesome library
+					// icons. If your presentation needs to load a different
+					// font-awesome library the 'loadIcons' option can be set to false
+					// and the menu will not attempt to load the font-awesome library.
+					loadIcons: true
+				}
+			});
+			/*var header = $('#header').html();
+			if ( window.location.search.match( /print-pdf/gi ) ) {
+				Reveal.addEventListener( 'ready', function( event ) {
+					$('.slide-background').append(header);
+				});
+			}
+			else {
+				$('div.reveal').append(header);
+			}*/
+		</script>
+		<link rel="stylesheet" href="css/mystyle.css">
+	</body>
+</html>

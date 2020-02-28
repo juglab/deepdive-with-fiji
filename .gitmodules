@@ -1,0 +1,6 @@
+[submodule "plugin/plugin/menu"]
+	path = plugin/plugin/menu
+	url = git@github.com:denehyg/reveal.js-menu.git
+[submodule "plugin/menu"]
+	path = plugin/menu
+	url = git@github.com:denehyg/reveal.js-menu.git
