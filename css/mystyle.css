@@ -21,6 +21,9 @@ body {
 	font-family: 'The Girl Next Door' !important;
 }
 
+.reveal h2, .reveal h3 {
+  text-transform: none;
+}
 
 .reveal section img.plain {
   background: none;
